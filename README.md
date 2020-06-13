@@ -12,17 +12,43 @@
 
 ### Цикломатска комплексност
 
-Цикломатската комплексност на овој код е 2, истата ја добив преку формулата P+1, каде што P е бројот на предикатни јазли. Во случајoв P=1, па цикломатската комплексност изнесува 2.
 
-### Тест случаи според критериумот  Multiple Condition
+### Тест случаи според критериумот Multiple Condition
 
-....
+        assertFalse(cls.function(new User(null, null, "email@email.com"), new ArrayList<>()));
+
+        assertFalse(cls.function(new User("null", null, "email@email.com"), new ArrayList<>()));
+
+        assertFalse(cls.function(new User("darjanz", null, "email@email.com"), new ArrayList<>()));
+
+        assertFalse(cls.function(new User("darjanz", "darjanzz", null), new ArrayList<>()));
+
+        assertFalse(cls.function(new User("darjanz", "blabla", null), new ArrayList<>()));
+
+        assertFalse(cls.function(new User("darjanz", "blablabla", null), new ArrayList<>()));
+
+        assertFalse(cls.function(new User("darjanz", "Password", "email@email.com"), new ArrayList<>()));
+
+        assertFalse(cls.function(new User("darjanz", "1Password", "email@email.com"), new ArrayList<>()));
+
+        assertTrue(cls.function(new User("darjanz", "1pAssword^", "email@email.com"), new ArrayList<>()));
 
 ### Тест случаи според критериумот Every Branch
 
-.... 
+        assertFalse(cls.function(null, new ArrayList<>()));
+
+        assertFalse(cls.function(new User("darjanz", "password", "email@email.com"), new ArrayList<>()));
+
+        assertFalse(cls.function(new User("darjanz", "darjanzz", "email@email.com"), new ArrayList<>()));
+
+        assertFalse(cls.function(new User("darjanz", "blabla", "email@email.com"), new ArrayList<>()));
+
+        assertFalse(cls.function(new User("darjanz", "Password", "email@email.com"), new ArrayList<>()));
+
+        assertFalse(cls.function(new User("darjanz", "1Password", "email@email.com"), new ArrayList<>()));
+
+        assertTrue(cls.function(new User("darjanz", "1pAssword^", "email@email.com"), new ArrayList<>()));
 
 ### Објаснување на напишаните unit tests
 
-...
-...
+Multiple Condition тестовите ги тестираат можните исходи од compound условите (пр. `if (username != null && password != null)`), додека пак Every Branch тестовите ги тестираат исходите од секоја точка на гранење во кодот.
